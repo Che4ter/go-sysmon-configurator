@@ -13,3 +13,12 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+bin/
+dev/
+.vscode/
+.idea/
+config.yaml
+config-dev.yaml
+/*.xml
+/*.yaml
+out/

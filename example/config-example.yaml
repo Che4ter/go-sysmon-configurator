@@ -1,0 +1,76 @@
+---
+defaults:
+  archiveDirectory: sysmon #Name of directories at volume roots into which copy-on-delete files are moved. The directory is protected with a System ACL (you can use PsExec from Sysinternals to access the directory using psexec -sid cmd). Default: Sysmon
+  checkRevocation: true #Controls signature revocation checks. Default: True
+  copyOnDeleteExtensions: #Extensions for files that are preserved on delete.
+  copyOnDeletePE:  #Preserves deleted executable image files. Default: False
+  copyOnDeleteProcesses: #Process name(s) for which file deletes will be preserved.
+  copyOnDeleteSIDs: #Comma-separated list of account SIDs for which file deletes will be preserved.
+  dnsLookup: true #Controls reverse DNS lookup. Default: True
+  driverName: #Uses specied name for driver and service images.
+  hashAlgorithms: #Hash algorithm(s) to apply for hashing. Algorithms supported include MD5, SHA1, SHA256, IMPHASH and * (all). Default: None
+  - MD5
+  - SHA256
+  - IMPHASH 
+outFilename: out/sysmon-config-sample.xml
+eventFilter:
+  ProcessCreate:
+    include: false
+    exclude: true
+  FileCreateTime:
+    include: true
+    exclude: true
+  NetworkConnect:
+    include: false
+    exclude: true
+  ProcessTerminate:
+    include: true
+    exclude: true
+  DriverLoad:
+    include: false
+    exclude: true
+  ImageLoad:
+    include: true
+    exclude: true
+  CreateRemoteThread:
+    include: false
+    exclude: true
+  RawAccessRead:
+    include: true
+    exclude: false
+  ProcessAccess:
+    include: true
+    exclude: true
+  FileCreate:
+    include: true
+    exclude: true
+  RegistryEvent:
+    include: true
+    exclude: true
+  FileCreateStreamHash:
+    include: true
+    exclude: true
+  PipeEvent:
+    include: false
+    exclude: true
+  WmiEvent:
+    include: false
+    exclude: true
+  DnsQuery:
+    include: false
+    exclude: true
+  FileDelete:
+    include: true
+    exclude: true
+  ClipboardChange:
+    include: true
+    exclude: false
+  ProcessTampering:
+    include: false
+    exclude: true
+  FileDeleteDetected:
+    include: true
+    exclude: true
+modulesBasePath: modules/
+modules:
+  - example.xml
