@@ -11,24 +11,20 @@ import (
 	"github.com/Che4ter/go-sysmon-configurator/helper"
 )
 
-func LoadSysmonModules(basePath string, modulesPath []string) ([]*SysmonSchema, error) {
-	sysmonModules := []*SysmonSchema{}
+func LoadSysmonModules(basePath string, modulesPath []string) ([]*Sysmon, error) {
+	sysmonModules := []*Sysmon{}
 
 	for _, modulesPath := range modulesPath {
-		// Open our xmlFile
 		xmlFile, err := os.Open(basePath + modulesPath)
-		// if we os.Open returns an error then handle it
 		if err != nil {
 			return nil, err
 		}
 
-		// defer the closing of our xmlFile so that we can parse it later on
 		defer xmlFile.Close()
 
-		// read our opened xmlFile as a byte array.
 		byteValue, _ := ioutil.ReadAll(xmlFile)
 
-		var sysmonModule SysmonSchema
+		var sysmonModule Sysmon
 		xml.Unmarshal(byteValue, &sysmonModule)
 
 		sysmonModules = append(sysmonModules, &sysmonModule)
@@ -37,7 +33,7 @@ func LoadSysmonModules(basePath string, modulesPath []string) ([]*SysmonSchema, 
 	return sysmonModules, nil
 }
 
-func MergeModulesWithBaseConfig(sysmonBaseConfig *SysmonSchema, sysmonModules []*SysmonSchema) error {
+func MergeModulesWithBaseConfig(sysmonBaseConfig *Sysmon, sysmonModules []*Sysmon) error {
 	for _, sysmonModule := range sysmonModules {
 		if sysmonModule.EventFiltering.RuleGroup != nil { //check if Rule Group exists in source config
 			for _, sourceRulegroup := range sysmonModule.EventFiltering.RuleGroup { //for each rule group in source config
@@ -82,7 +78,7 @@ func MergeModulesWithBaseConfig(sysmonBaseConfig *SysmonSchema, sysmonModules []
 	return nil
 }
 
-func RemoveRuleNames(sysmonBaseConfig *SysmonSchema) error {
+func RemoveRuleNames(sysmonBaseConfig *Sysmon) error {
 	content, err := xml.MarshalIndent(sysmonBaseConfig, "", " ")
 	if err != nil {
 		return err
@@ -92,7 +88,7 @@ func RemoveRuleNames(sysmonBaseConfig *SysmonSchema) error {
 	nameRegex := regexp.MustCompile("name=\"(.*?)\"")
 	s = nameRegex.ReplaceAllString(s, "")
 
-	var modifiedSysmon SysmonSchema
+	var modifiedSysmon Sysmon
 	err = xml.Unmarshal([]byte(s), &modifiedSysmon)
 	if err != nil {
 		return err
@@ -103,7 +99,7 @@ func RemoveRuleNames(sysmonBaseConfig *SysmonSchema) error {
 	return nil
 }
 
-func ReplaceRuleNamesWithID(sysmonBaseConfig *SysmonSchema) error {
+func ReplaceRuleNamesWithID(sysmonBaseConfig *Sysmon) error {
 	content, err := xml.MarshalIndent(sysmonBaseConfig, "", " ")
 	if err != nil {
 		return err
@@ -121,7 +117,7 @@ func ReplaceRuleNamesWithID(sysmonBaseConfig *SysmonSchema) error {
 		return result
 	})
 
-	var modifiedSysmon SysmonSchema
+	var modifiedSysmon Sysmon
 	err = xml.Unmarshal([]byte(s), &modifiedSysmon)
 	if err != nil {
 		return err
@@ -693,14 +689,14 @@ type EventFilteringRules struct {
 	FileDeleteDetected   []*FileDeleteDetected   `xml:"FileDeleteDetected,omitempty"`
 }
 
-// EventFiltering ...
+// RuleGroups ...
 type RuleGroup struct {
 	EventFilteringRules
 	GroupRelationAttr string `xml:"groupRelation,attr,omitempty"`
 }
 
-// SysmonSchema ...
-type SysmonSchema struct {
+// Sysmon ...
+type Sysmon struct {
 	Comment                string         `xml:",comment"`
 	SchemaversionAttr      float32        `xml:"schemaversion,attr"`
 	ArchiveDirectory       string         `xml:"ArchiveDirectory,omitempty"`

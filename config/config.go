@@ -137,8 +137,8 @@ func ParseFlags() (string, bool, bool, error) {
 	return configPath, generateRuleIds, removeRuleNames, nil
 }
 
-func GenerateBaseSysmonConfig(cfg Config, schemaVersion float32) (*sysmon.SysmonSchema, error) {
-	var sysmonBaseConfig sysmon.SysmonSchema
+func GenerateBaseSysmonConfig(cfg Config, schemaVersion float32) (*sysmon.Sysmon, error) {
+	var sysmonBaseConfig sysmon.Sysmon
 	sysmonBaseConfig.SchemaversionAttr = schemaVersion
 	sysmonBaseConfig.ArchiveDirectory = cfg.Defaults.ArchiveDirectory
 	sysmonBaseConfig.CheckRevocation = cfg.Defaults.CheckRevocation
