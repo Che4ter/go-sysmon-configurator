@@ -22,13 +22,13 @@ genconfig -config=config.xml
 
 ```-config=file.yaml``` path to base config
 
-```-genid``` adds id to all contition, replaces existing rule names
+```-genid``` add id's to all conditions, replaces existing rule names
 
 ```-rmnames``` removes rule names
 
 
 ## Module Format
-Each .xml module file must contain a valid sysmon config based on rulegroups. 
+Each .xml module file must contain a valid sysmon config based on ruleg roups. 
 At the moment modules from the sysmon-modular repository by olafhartong are compatible.
 
 In addition the utility only includes rule groups if their event type include mode is activated in the base config file. 
@@ -52,15 +52,15 @@ The recommendation is to group the modules by event type in a folder structur li
 
 
 ## Disclaimer
-The utility is currenlty a working prototype and some parsing bugs are to expected. 
-Therefore review the generated sysmon configurations for errors or inconsistencies.
-At the moment only generated works for Sysmon 13.31 schemaversion 4.81, but the schema is not enforced.
+The utility is currently  a working prototype and some parsing bugs are to expected. 
+Therefore, review the generated sysmon configurations for errors or inconsistencies.
+Currently only generated works for Sysmon 13.31 schemaversion 4.81, but the schema is not enforced.
 
 ## Feature Ideas
 - [ ] Schema validation
 - [ ] Schema optimizations like duplicate detection
 - [ ] Sorting of conditions
-- [ ] Support of mulitple schemas
+- [ ] Support of multiple schemas
 
 ## Credits
 - Sysinternals for providing [Sysmon](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon)
