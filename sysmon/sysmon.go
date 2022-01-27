@@ -132,7 +132,7 @@ func ReplaceRuleNamesWithID(sysmonBaseConfig *Sysmon) error {
 type GenericStringRule struct {
 	NameAttr      string `xml:"name,attr,omitempty"`
 	ConditionAttr string `xml:"condition,attr,omitempty"`
-	Value         string `xml:",chardata"`
+	Value         string `xml:",innerxml"`
 }
 
 // UInt32Rule is This type is applied to a Sysmon rule element where there are no constraints on the value.
