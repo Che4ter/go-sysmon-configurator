@@ -594,7 +594,7 @@ type FileDeleteRule struct {
 type ClipboardChange struct {
 	OnmatchAttr string                 `xml:"onmatch,attr"`
 	Rules       []*ClipboardChangeRule `xml:"Rule"`
-	ClipboardChangeRule
+	ClipboardChangeFields
 }
 
 type ClipboardChangeFields struct {
@@ -641,7 +641,7 @@ type ProcessTamperingRule struct {
 type FileDeleteDetected struct {
 	OnmatchAttr string                    `xml:"onmatch,attr"`
 	Rules       []*FileDeleteDetectedRule `xml:"Rule"`
-	FileDeleteDetectedRule
+	FileDeleteDetectedFields
 }
 
 type FileDeleteDetectedFields struct {

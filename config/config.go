@@ -148,7 +148,7 @@ func GenerateBaseSysmonConfig(cfg Config, schemaVersion float32) (*sysmon.Sysmon
 	sysmonBaseConfig.CopyOnDeleteSIDs = cfg.Defaults.CopyOnDeleteSIDs
 	sysmonBaseConfig.DnsLookup = cfg.Defaults.DNSLookup
 	sysmonBaseConfig.DriverName = cfg.Defaults.DriverName
-	sysmonBaseConfig.HashAlgorithms = strings.Join(cfg.Defaults.HashAlgorithms, ", ")
+	sysmonBaseConfig.HashAlgorithms = strings.Join(cfg.Defaults.HashAlgorithms, ",")
 
 	sysmonBaseConfig.EventFiltering.RuleGroup = []*sysmon.RuleGroup{}
 
