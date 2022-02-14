@@ -22,10 +22,16 @@ func LoadSysmonModules(basePath string, modulesPath []string) ([]*Sysmon, error)
 
 		defer xmlFile.Close()
 
-		byteValue, _ := ioutil.ReadAll(xmlFile)
+		byteValue, err := ioutil.ReadAll(xmlFile)
+		if err != nil {
+			return nil, err
+		}
 
 		var sysmonModule Sysmon
-		xml.Unmarshal(byteValue, &sysmonModule)
+		err = xml.Unmarshal(byteValue, &sysmonModule)
+		if err != nil {
+			return nil, err
+		}
 
 		sysmonModules = append(sysmonModules, &sysmonModule)
 	}
