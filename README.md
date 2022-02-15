@@ -21,9 +21,9 @@ The generated config uses a separate ```<RuleGroup>``` tag per event type an onm
       <ProcessCreate onmatch="exclude">
       </ProcessCreate>
     </RuleGroup>
+    <RuleGroup name="" groupRelation="or">
       <ProcessCreate onmatch="include">
       </ProcessCreate> 
-    <RuleGroup name="" groupRelation="or">
     </RuleGroup>
   </EventFiltering>
 </Sysmon>
