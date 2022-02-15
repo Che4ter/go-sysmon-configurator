@@ -1,4 +1,5 @@
 ---
+schemaVersion: 4.81
 defaults:
   archiveDirectory: sysmon #Name of directories at volume roots into which copy-on-delete files are moved. The directory is protected with a System ACL (you can use PsExec from Sysinternals to access the directory using psexec -sid cmd). Default: Sysmon
   checkRevocation: true #Controls signature revocation checks. Default: True
@@ -14,63 +15,65 @@ defaults:
   - IMPHASH 
 outFilename: out/sysmon-config-sample.xml
 eventFilter:
-  ProcessCreate:
+eventFilter:
+  - eventName: ProcessCreate
     include: false
     exclude: true
-  FileCreateTime:
+  - eventName: FileCreateTime
     include: true
     exclude: true
-  NetworkConnect:
+  - eventName: NetworkConnect
     include: false
     exclude: true
-  ProcessTerminate:
+  - eventName: ProcessTerminate
     include: true
     exclude: true
-  DriverLoad:
+  - eventName: DriverLoad
     include: false
     exclude: true
-  ImageLoad:
+  - eventName: ImageLoad
     include: true
     exclude: true
-  CreateRemoteThread:
+  - eventName: CreateRemoteThread
     include: false
     exclude: true
-  RawAccessRead:
+  - eventName: RawAccessRead
     include: true
     exclude: false
-  ProcessAccess:
+  - eventName: ProcessAccess
     include: true
     exclude: true
-  FileCreate:
+  - eventName: FileCreate
     include: true
     exclude: true
-  RegistryEvent:
+  - eventName: RegistryEvent
     include: true
     exclude: true
-  FileCreateStreamHash:
+  - eventName: FileCreateStreamHash
     include: true
     exclude: true
-  PipeEvent:
+  - eventName: PipeEvent
     include: false
     exclude: true
-  WmiEvent:
+  - eventName: WmiEvent
     include: false
     exclude: true
-  DnsQuery:
+  - eventName: DnsQuery
     include: false
     exclude: true
-  FileDelete:
-    include: true
-    exclude: true
-  ClipboardChange:
+  - eventName: FileDelete
     include: true
     exclude: false
-  ProcessTampering:
+  - eventName: ClipboardChange
+    include: true
+    exclude: false
+  - eventName: ProcessTampering
     include: false
     exclude: true
-  FileDeleteDetected:
+  - eventName: FileDeleteDetected
     include: true
     exclude: true
 modulesBasePath: modules/
 modules:
-  - example.xml
+  - module-example.xml
+  - module-example_2.xml

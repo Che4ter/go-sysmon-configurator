@@ -1,10 +1,6 @@
-<Sysmon schemaversion="4.81">
-  <EventFiltering>
     <RuleGroup name="" groupRelation="or">
       <ProcessCreate onmatch="exclude">
         <Image name="technique_id=T1546.011" condition="is">explorer.exe</Image>
         <Image name="technique_id=T1546.011" condition="is">test.exe</Image>
       </ProcessCreate>
     </RuleGroup>
-  </EventFiltering>
-</Sysmon>
