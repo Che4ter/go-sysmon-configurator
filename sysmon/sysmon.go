@@ -143,6 +143,17 @@ func AddModulesToConfig(sysmonConfig SysmonConfig, sysmonModules map[string]Even
 					GroupRelationAttr: "or",
 				}
 				sysmonConfig.EventFiltering.RuleGroups = append(sysmonConfig.EventFiltering.RuleGroups, ruleGroup)
+			} else if eventType.Exclude {
+				ruleGroup := RuleGroup{
+					EventFilters: EventFilter{
+						XMLName:    xml.Name{Local: eventType.EventName},
+						OnMatchAtt: "exclude",
+						Conditions: []Condition{},
+						Rules:      []Rule{},
+					},
+					GroupRelationAttr: "or",
+				}
+				sysmonConfig.EventFiltering.RuleGroups = append(sysmonConfig.EventFiltering.RuleGroups, ruleGroup)
 			}
 		}
 	}
