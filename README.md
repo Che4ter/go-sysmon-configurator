@@ -4,18 +4,18 @@ Utility to create sysmon configuration based on modules
 Inspired by [sysmon-modular](https://github.com/olafhartong/sysmon-modular), but adapted to better fit my 
 personal needs. 
 
-It uses the same module format but adds the follwing features:
+It uses the same module format but adds the following features:
 - option to define settings like HashAlgorithm
 - customize base config 
 - option to remove rule name or replace with ids to minimize to log volume
 - prints sha256 after generation
 - sorts condition per rulegroup based on xml tag and condition value
 
-The configurator is not validating the schema, event types or conditions. Therefore new event types can be added to the config file without code changes.
+The configurator is not validating the schema, event types or conditions. Therefore, new event types can be added to the config file without code changes.
 
 The generated config uses a separate ```<RuleGroup>``` tag per event type an onmatch condition (include/exclude):
 ```
-<Sysmon schemaversion="4.81">
+<Sysmon schemaversion="4.83">
   <EventFiltering>
     <RuleGroup name="" groupRelation="or">
       <ProcessCreate onmatch="exclude">
@@ -62,13 +62,13 @@ sysmon.exe -c sysmonconfig.xml
 ## Module Format
 At the moment there are two module format supported. 
 - The format from [sysmon-modular](https://github.com/olafhartong/sysmon-modular) repository by olafhartong which uses ```<Sysmon>``` as root tags
-- The reduced format contianing only the rule using the ```<RuleGroup>``` as root tag
+- The reduced format containing only the rule using the ```<RuleGroup>``` as root tag
 
-In addition the utility only includes rule groups if their event type include mode is activated in the base config file. 
+In addition, the utility only includes rule groups if their event type include mode is activated in the base config file. 
 
 **symon-modular format:**
 ```
-<Sysmon schemaversion="4.81">
+<Sysmon schemaversion="4.83">
   <EventFiltering>
     <RuleGroup name="" groupRelation="or">
       <ProcessCreate onmatch="exclude">
@@ -88,7 +88,7 @@ In addition the utility only includes rule groups if their event type include mo
 </RuleGroup>
 ```
 
-The recommendation is to group the modules by event type in a folder structur like the following:
+The recommendation is to group the modules by event type in a folder structure like the following:
 - modules/
   - 1_process_creation/
   - 2_file_create_time/
@@ -96,9 +96,8 @@ The recommendation is to group the modules by event type in a folder structur li
 
 
 ## Disclaimer
-The utility is currently  a working prototype and some parsing bugs are to expected. 
-Therefore, review the generated sysmon configurations for errors or inconsistencies.
-Currently only generated works for Sysmon 13.31 schemaversion 4.81, but the schema is not enforced.
+Always test the generated config before deploy to production. 
+The schema itself is not enforced, so if you use invalid tags it can produce invalid configs.
 
 ## Feature Ideas
 - [ ] Schema validation

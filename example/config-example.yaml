@@ -1,5 +1,5 @@
 ---
-schemaVersion: 4.81
+schemaVersion: 4.83
 defaults:
   archiveDirectory: sysmon #Name of directories at volume roots into which copy-on-delete files are moved. The directory is protected with a System ACL (you can use PsExec from Sysinternals to access the directory using psexec -sid cmd). Default: Sysmon
   checkRevocation: true #Controls signature revocation checks. Default: True
@@ -14,7 +14,6 @@ defaults:
   - SHA256
   - IMPHASH 
 outFilename: out/sysmon-config-sample.xml
-eventFilter:
 eventFilter:
   - eventName: ProcessCreate
     include: false
@@ -73,7 +72,13 @@ eventFilter:
   - eventName: FileDeleteDetected
     include: true
     exclude: true
-modulesBasePath: modules/
+  - eventName: FileBlockExecutable
+    include: true
+    exclude: false
+  - eventName: FileBlockShredding
+    include: true
+    exclude: false
+modulesBasePath: example/module/
 modules:
   - module-example.xml
   - module-example_2.xml
