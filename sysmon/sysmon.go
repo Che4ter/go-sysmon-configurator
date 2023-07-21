@@ -237,7 +237,7 @@ type EventFilteringRules struct {
 type SysmonConfig struct {
 	XMLName                xml.Name
 	Comment                string              `xml:",comment"`
-	SchemaversionAttr      float32             `xml:"schemaversion,attr"`
+	SchemaversionAttr      string              `xml:"schemaversion,attr"`
 	ArchiveDirectory       string              `xml:"ArchiveDirectory,omitempty"`
 	CheckRevocation        bool                `xml:"CheckRevocation,omitempty"`
 	CopyOnDeleteExtensions string              `xml:"CopyOnDeleteExtensions,omitempty"`
@@ -250,8 +250,8 @@ type SysmonConfig struct {
 	EventFiltering         EventFilteringRules `xml:"EventFiltering"`
 }
 
-//Sorting implementation for Condition
-//1. Condition Tag Name, 2. Value
+// Sorting implementation for Condition
+// 1. Condition Tag Name, 2. Value
 type Conditions []Condition
 
 func (e EventFilter) Sort() {

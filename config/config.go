@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	SchemaVersion float32 `yaml:"schemaVersion"`
+	SchemaVersion string `yaml:"schemaVersion"`
 	Defaults      struct {
 		ArchiveDirectory       string   `yaml:"archiveDirectory"`
 		CheckRevocation        bool     `yaml:"checkRevocation"`
