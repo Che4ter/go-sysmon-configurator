@@ -12,6 +12,8 @@ import (
 var Version = "dev build"
 
 func main() {
+	fmt.Println("genconfig " + Version)
+
 	cfgPath, generateRuleIds, removeRuleNames, err := config.ParseFlags()
 	if err != nil {
 		log.Fatal(err)
